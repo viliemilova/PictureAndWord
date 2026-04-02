@@ -1,0 +1,84 @@
+<html>
+<title>Игра с картинки и думи</title>
+<body style="background-color: yellow">
+<label id=5 style="font-size: 30">Точки: 0</label>
+<button id=6 onclick=start() style="font-size: 30">С Т А Р Т</button>
+<br><br>
+<img id=1 width=200 height=200>
+<button id=2 onclick="f1()" style="position: absolute; width: 150; height: 50; top:50; font-size: 30"></button>
+<button id=3 onclick="f2()" style="position: absolute; width: 150; height: 50; top:150; font-size: 30"></button>
+<button id=4 onclick="f2()" style="position: absolute; width: 150; height: 50; top:250; font-size: 30"></button>
+<script>
+var f1=function()
+{
+points++;
+document.getElementById("5").innerHTML="Точки: "+points;
+n=Math.floor(Math.random()*words.length);
+document.getElementById("1").src=n+".jpg";
+document.getElementById("2").innerHTML=shuffle(words[n]);
+var x=Math.floor(Math.random()*words.length);
+document.getElementById("3").innerHTML=shuffle(words[x]);
+var y=Math.floor(Math.random()*words.length);
+document.getElementById("4").innerHTML=shuffle(words[y]);
+}
+
+var f2=function()
+{
+clearInterval(s);
+alert("Край на играта!");
+}
+
+var words=["килим","мишка","книга","облак","кирка","топка"];
+var n;
+var s;
+var start=function()
+{
+document.getElementById("6").disabled=true;
+n=Math.floor(Math.random()*words.length);
+document.getElementById("1").src=n+".jpg";
+document.getElementById("2").innerHTML=shuffle(words[n]);
+var x=Math.floor(Math.random()*words.length);
+document.getElementById("3").innerHTML=shuffle(words[x]);
+var y=Math.floor(Math.random()*words.length);
+document.getElementById("4").innerHTML=shuffle(words[y]);
+s=setInterval(move, 2000);
+}
+
+var points=0;
+var w=window.innerWidth-150;
+var h=window.innerHeight-50;
+
+var move=function()
+{
+var x=Math.floor(Math.random()*w);
+var y=Math.floor(Math.random()*h);
+document.getElementById("2").style.left=x;
+document.getElementById("2").style.top=y;
+
+x=Math.floor(Math.random()*w);
+y=Math.floor(Math.random()*h);
+document.getElementById("3").style.left=x;
+document.getElementById("3").style.top=y;
+
+x=Math.floor(Math.random()*w);
+y=Math.floor(Math.random()*h);
+document.getElementById("4").style.left=x;
+document.getElementById("4").style.top=y;
+}
+
+var shuffle=function(word)
+{
+var letters=word.split('');
+for(var i=0; i<word.length; i++)
+{
+var x=Math.floor(Math.random()*word.length);
+var y=Math.floor(Math.random()*word.length);
+var temp=letters[x];
+letters[x]=letters[y];
+letters[y]=temp;
+}
+return letters.join(' ');
+}
+</script>
+</body >
+</html>
